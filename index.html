@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
         *{
@@ -50,8 +50,8 @@
 
         function timer(){
             let now = new Date();
-            let end = new Date(2022, 7, 7)
-            let from = new Date(2021, 7, 7)
+            let end = new Date(2022, 6, 7)
+            let from = new Date(2021, 6, 7)
             if (now.getHours() > 19){
                 document.body.classList.add("b");
             }
@@ -86,11 +86,12 @@
          * @param date {Date}
          */
         function getStr(date){
-            let days = Math.round(date.getTime()/(1000*60*60*24));
+            let days = Math.round(date.getTime()/(864e+5));
             let hours = nrmlz(date.getHours());
             let minutes = nrmlz(date.getMinutes());
             let seconds = nrmlz(date.getSeconds());
             let ms = date.getMilliseconds();
+
             if (ms === 0){
                 ms = "000";
             } else if (ms < 10){
