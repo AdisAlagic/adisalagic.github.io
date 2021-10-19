@@ -50,12 +50,12 @@
 
         function timer(){
             let now = new Date();
-            let end = new Date(2022, 10, 21)
+            let end = new Date(2022, 9, 21)
             if (now.getTime() >= end.getTime()){
                 document.getElementsByClassName('title')[0].textContent = "Наконец-то! Игорь здесь! Yaay!"
                 return;
             }
-            let from = new Date(2021, 10, 21)
+            let from = new Date(2021, 9, 21)
             if (now.getHours() > 19){
                 document.body.classList.add("b");
             }
