@@ -1,0 +1,15 @@
+body{
+    background: black;
+    overflow: hidden;
+}
+
+.cursor{
+    margin-left: -5px;
+    color: #e3e3e3;
+}
+
+span{
+    font-size: 20px;
+    color: #e3e3e3;
+    font-family: "Cascadia Code", serif;
+}
