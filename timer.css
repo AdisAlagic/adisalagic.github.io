@@ -1,0 +1,21 @@
+* {
+    user-select: none;
+}
+
+body {
+    background: #2e2e2e;
+}
+
+.timer {
+    height: 97vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.timer p{
+    color: #e3e3e3;
+    font-size: 70px;
+    text-align: center;
+}
+
