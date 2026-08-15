@@ -7,7 +7,7 @@ const msPerDay = 24 * msPerHour;
 const msPerYear = 365 * msPerDay;
 const start = new Date()
 start.setFullYear(2026, 7,14)
-start.setHours(18, 0, 0)
+start.setHours(17, 20, 0)
 document.addEventListener("DOMContentLoaded", ev => {
     timer = document.getElementById("text")
     setInterval(() => {
