@@ -1,17 +1,1572 @@
-<!doctype html>
-<html lang="ru">
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="timer.css">
-    <script src="super_timer.js"></script>
-    <title>Таймер</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Игорь Плахов — Kotlin Android & Desktop Developer | Резюме</title>
+  <meta name="description" content="Резюме Игоря Плахова — Kotlin Android Developer. Jetpack Compose, Compose Multiplatform, Coroutines, Clean Architecture. Разработка современных нативных мобильных и десктопных приложений.">
+  <meta name="keywords" content="Kotlin, Android Developer, Jetpack Compose, Compose Multiplatform, Igor Plakhov, Плахов Игорь, Разработчик Android, MVI, MVVM, Room, Retrofit">
+  <meta name="author" content="Игорь Плахов">
+
+  <!-- Open Graph / Social Sharing -->
+  <meta property="og:type" content="profile">
+  <meta property="og:title" content="Игорь Плахов — Kotlin Android Developer">
+  <meta property="og:description" content="Нативная разработка под Android и Desktop. Jetpack Compose, Clean Architecture, Coroutines, MVI/MVVM.">
+  <meta property="og:url" content="https://adisalagic.github.io/">
+  <meta property="og:site_name" content="Игорь Плахов | Портфолио & Резюме">
+  <meta property="og:image" content="avatar.jpg">
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/print.css" media="print">
+
+  <!-- Favicon SVG -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='25' fill='%237F52FF'/><path d='M25 20 L50 20 L25 50 Z M25 50 L50 20 L75 50 L50 80 L25 50 Z M50 80 L75 50 L75 80 Z' fill='%23FFFFFF'/></svg>">
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Игорь Плахов",
+    "alternateName": "Igor Plakhov",
+    "jobTitle": "Kotlin Android Developer",
+    "image": "avatar.jpg",
+    "email": "mailto:igor.plahov.a.a@gmail.com",
+    "telephone": "+7-926-074-68-00",
+    "url": "https://github.com/AdisAlagic",
+    "sameAs": [
+      "https://github.com/AdisAlagic",
+      "https://t.me/adisalagic"
+    ],
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Москва",
+      "addressCountry": "RU"
+    },
+    "knowsAbout": [
+      "Kotlin", "Android SDK", "Jetpack Compose", "Compose Multiplatform",
+      "Coroutines", "Flow", "Clean Architecture", "Room", "Retrofit", "MVI", "MVVM"
+    ]
+  }
+  </script>
 </head>
 <body>
-    <div class="timer">
-        <p id="text">19:00</p>
+  <!-- Ambient background lighting effects -->
+  <div class="ambient-glow glow-top" aria-hidden="true"></div>
+  <div class="ambient-glow glow-bottom" aria-hidden="true"></div>
+
+  <!-- Navigation Header -->
+  <header class="site-header" id="header">
+    <div class="header-inner container">
+      <a href="#hero" class="brand-logo" aria-label="На главную">
+        <span class="logo-icon">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+            <path d="M12 2L2 12l10 10 10-10L12 2zm0 3.8l6.2 6.2-6.2 6.2-6.2-6.2L12 5.8z"/>
+          </svg>
+        </span>
+        <span class="brand-text">
+          <span class="name">Плахов Игорь</span>
+          <span class="role-tag">Kotlin Dev</span>
+        </span>
+      </a>
+
+      <nav class="nav-menu" id="navMenu" aria-label="Основная навигация">
+        <ul class="nav-list">
+          <li><a href="#about" class="nav-link" data-ru="О себе" data-en="About">О себе</a></li>
+          <li><a href="#skills" class="nav-link" data-ru="Навыки" data-en="Skills">Навыки</a></li>
+          <li><a href="#experience" class="nav-link" data-ru="Опыт" data-en="Experience">Опыт</a></li>
+          <li><a href="#projects" class="nav-link" data-ru="Проекты" data-en="Projects">Проекты</a></li>
+          <li><a href="#code" class="nav-link" data-ru="Код" data-en="Code">Код</a></li>
+          <li><a href="#education" class="nav-link" data-ru="Образование" data-en="Education">Образование</a></li>
+          <li><a href="#contact" class="nav-link" data-ru="Контакты" data-en="Contact">Контакты</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <!-- Language Switcher -->
+        <button id="langToggle" class="btn-icon" aria-label="Сменить язык" title="Переключить язык (RU/EN)">
+          <span class="lang-label" id="langLabel">EN</span>
+        </button>
+
+        <!-- Theme Toggle -->
+        <button id="themeToggle" class="btn-icon" aria-label="Переключить тему оформления" title="Светлая/Тёмная тема">
+          <svg class="sun-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"></circle>
+            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+          </svg>
+          <svg class="moon-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+
+        <!-- Mobile Menu Toggle -->
+        <button id="menuToggle" class="btn-icon mobile-only" aria-label="Открыть меню">
+          <span class="burger-bar"></span>
+          <span class="burger-bar"></span>
+          <span class="burger-bar"></span>
+        </button>
+      </div>
     </div>
+  </header>
+
+  <main id="mainContent">
+    <!-- Hero Section -->
+    <section class="section-hero" id="hero">
+      <div class="container hero-container">
+        <div class="hero-content">
+          <!-- Availability Badge -->
+          <div class="badge-status">
+            <span class="status-dot"></span>
+            <span data-ru="Открыт к предложениям: Удалёнка / Гибрид / Офис (Москва)" 
+                  data-en="Open to opportunities: Remote / Hybrid / Moscow Office">
+              Открыт к предложениям: Удалёнка / Гибрид / Офис (Москва)
+            </span>
+          </div>
+
+          <h1 class="hero-title">
+            <span class="greeting" data-ru="Привет, я" data-en="Hi, I am">Привет, я</span>
+            <span class="highlight-name">Плахов Игорь</span>
+          </h1>
+
+          <div class="hero-role-wrapper">
+            <span class="hero-role-prefix">&gt; </span>
+            <span class="hero-role-text" id="roleTypewriter">Kotlin Android & Desktop Developer</span>
+            <span class="cursor-blink">_</span>
+          </div>
+
+          <p class="hero-description" data-ru="Создаю высокопроизводительные мобильные и десктопные приложения на нативном Kotlin с Jetpack Compose и Compose Multiplatform. Проектирую чистую реактивную архитектуру (MVI/MVVM), кастомные UI-компоненты и надежную интеграцию с серверными API." 
+             data-en="Building high-performance native Android & Desktop applications with Kotlin, Jetpack Compose, and Compose Multiplatform. Crafting clean reactive architectures (MVI/MVVM), custom UI components, and resilient network & database systems.">
+            Создаю высокопроизводительные мобильные и десктопные приложения на нативном Kotlin с Jetpack Compose и Compose Multiplatform. Проектирую чистую реактивную архитектуру (MVI/MVVM), кастомные UI-компоненты и надежную интеграцию с серверными API.
+          </p>
+
+          <!-- Quick Contacts Pills -->
+          <div class="quick-contact-pills">
+            <a href="https://t.me/adisalagic" target="_blank" rel="noopener noreferrer" class="contact-pill pill-telegram">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.52 2.77-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .37z"/>
+              </svg>
+              <span>@adisalagic</span>
+            </a>
+
+            <a href="https://hh.ru/resume/78f4c138ff07c292d00039ed1f6754546c385a" target="_blank" rel="noopener noreferrer" class="contact-pill pill-hh" title="Профиль резюме на HeadHunter">
+              <svg viewBox="0 0 24 24" width="16" height="16" class="hh-svg-icon" aria-hidden="true">
+                <circle cx="12" cy="12" r="12" fill="#ea1b24"/>
+                <path d="M5.3 7h2v4h2V7h2v10h-2v-4h-2v4h-2V7zm7.4 0h2v4h2V7h2v10h-2v-4h-2v4h-2V7z" fill="#ffffff"/>
+              </svg>
+              <span>HeadHunter</span>
+            </a>
+
+            <div class="contact-pill copyable-pill" data-copy="igor.plahov.a.a@gmail.com" title="Нажмите, чтобы скопировать email">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+              </svg>
+              <span>igor.plahov.a.a@gmail.com</span>
+              <span class="copy-badge">copy</span>
+            </div>
+
+            <a href="tel:+79260746800" class="contact-pill copyable-pill" data-copy="+79260746800" data-type="phone" title="Нажмите, чтобы позвонить или скопировать номер">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+              <span>+7 (926) 074-68-00</span>
+              <span class="copy-badge">copy</span>
+            </a>
+
+            <span class="contact-pill location-pill">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+              <span data-ru="Москва, м. Саларьево" data-en="Moscow, Salaryevo">Москва, м. Саларьево</span>
+            </span>
+          </div>
+
+          <!-- CTAs -->
+          <div class="hero-actions">
+            <a href="https://t.me/adisalagic" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.52 2.77-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .37z"/>
+              </svg>
+              <span data-ru="Написать в Telegram" data-en="Chat on Telegram">Написать в Telegram</span>
+            </a>
+
+            <a href="https://github.com/AdisAlagic" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+              </svg>
+              <span>GitHub (AdisAlagic)</span>
+            </a>
+
+            <a href="#projects" class="btn btn-outline">
+              <span data-ru="Смотреть проекты" data-en="View Projects">Смотреть проекты</span>
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Profile Card with Avatar & Tech Badges -->
+        <div class="hero-visual">
+          <div class="profile-card glow-card">
+            <div class="profile-avatar-container">
+              <div class="avatar-frame">
+                <div class="avatar-glow"></div>
+                <div class="avatar-placeholder" id="avatarBox">
+                  <img src="avatar.jpg" alt="Плахов Игорь — Kotlin Android Developer" class="avatar-photo">
+                </div>
+              </div>
+            </div>
+
+            <!-- Experience & Stack Highlight Badges (Under Avatar) -->
+            <div class="profile-badges-row">
+              <div class="profile-stat-badge">
+                <span class="badge-number">3+</span>
+                <span class="badge-label" data-ru="года опыта" data-en="years exp">года опыта</span>
+              </div>
+              <div class="profile-stat-badge">
+                <span class="badge-number">100%</span>
+                <span class="badge-label" data-ru="Kotlin & Compose" data-en="Kotlin & Compose">Kotlin & Compose</span>
+              </div>
+            </div>
+
+            <!-- Profile Info in Card -->
+            <div class="profile-info-footer">
+              <div class="tech-tag-group">
+                <span class="tech-tag tag-kotlin">Kotlin</span>
+                <span class="tech-tag tag-compose">Jetpack Compose</span>
+                <span class="tech-tag tag-mvi">MVI / MVVM</span>
+                <span class="tech-tag tag-cmp">Compose Multiplatform</span>
+              </div>
+              <div class="profile-specs-list">
+                <div class="spec-row">
+                  <span class="spec-title" data-ru="Образование:" data-en="Education:">Образование:</span>
+                  <span class="spec-val">КПИТ МИРЭА, Школа 21</span>
+                </div>
+                <div class="spec-row">
+                  <span class="spec-title" data-ru="Локация:" data-en="Location:">Локация:</span>
+                  <span class="spec-val" data-ru="Москва, РФ" data-en="Moscow, RU">Москва, РФ</span>
+                </div>
+                <div class="spec-row">
+                  <span class="spec-title" data-ru="Английский:" data-en="English:">Английский:</span>
+                  <span class="spec-val">B2 (Upper-Intermediate)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Metrics Counters -->
+      <div class="container hero-metrics">
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <span class="metric-val" data-count="3">3+</span>
+            <span class="metric-title" data-ru="Года практики в разработке" data-en="Years of Dev Experience">Года практики в разработке</span>
+            <span class="metric-desc">Android, Desktop, Java & Kotlin</span>
+          </div>
+          <div class="metric-card">
+            <span class="metric-val" data-count="5">5+</span>
+            <span class="metric-title" data-ru="Проектов на Jetpack Compose" data-en="Projects on Jetpack Compose">Проектов на Jetpack Compose</span>
+            <span class="metric-desc">Mobile, Desktop, Games & Tools</span>
+          </div>
+          <div class="metric-card">
+            <span class="metric-val" data-count="5">5</span>
+            <span class="metric-title" data-ru="Хакатонов и чемпионатов" data-en="Hackathons & Championships">Хакатонов и чемпионатов</span>
+            <span class="metric-desc">Hack&Change, Javathon, Внедрейд</span>
+          </div>
+          <div class="metric-card">
+            <span class="metric-val">B2</span>
+            <span class="metric-title" data-ru="Уровень английского языка" data-en="English Proficiency Level">Уровень английского языка</span>
+            <span class="metric-desc" data-ru="Техническая документация и общение" data-en="Technical docs & communication">Техническая документация и общение</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Me Section -->
+    <section class="section" id="about">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag" data-ru="// ОБО МНЕ" data-en="// ABOUT ME">// ОБО МНЕ</span>
+          <h2 class="section-title" data-ru="Разработчик с фокусом на чистый код и Compose" data-en="Developer Focused on Clean Code & Compose">
+            Разработчик с фокусом на чистый код и Compose
+          </h2>
+          <p class="section-subtitle" data-ru="Инженерный подход, понимание жизненного цикла Android и стремление к бескомпромиссному качеству интерфейса." 
+             data-en="Engineering mindset, deep Android lifecycle understanding, and dedication to uncompromising UI performance.">
+            Инженерный подход, понимание жизненного цикла Android и стремление к бескомпромиссному качеству интерфейса.
+          </p>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-text-card card">
+            <h3 class="card-title" data-ru="Профиль и подход к разработке" data-en="Profile & Engineering Philosophy">
+              Профиль и подход к разработке
+            </h3>
+            <p class="paragraph" data-ru="Я — Android / Kotlin разработчик с профильным образованием в программировании (МИРЭА) и школой программирования от Сбера («Школа 21»). Специализируюсь на создании современных нативных приложений под Android и Desktop с использованием Jetpack Compose и Compose Multiplatform." 
+               data-en="I am an Android / Kotlin developer with specialized software engineering education (MIREA) and Sberbank's coding school ('School 21'). I specialize in crafting modern native Android and Desktop applications utilizing Jetpack Compose and Compose Multiplatform.">
+              Я — Android / Kotlin разработчик с профильным образованием в программировании (МИРЭА) и школой программирования от Сбера («Школа 21»). Специализируюсь на создании современных нативных приложений под Android и Desktop с использованием Jetpack Compose и Compose Multiplatform.
+            </p>
+            <p class="paragraph" data-ru="Код пишу чисто и структурированно, строго следуя принципам Clean Architecture и SOLID. Глубоко понимаю механизмы управления состоянием (MVI / MVVM), рекомпозиции в Compose, оптимизацию рендеринга и профилирование утечек памяти." 
+               data-en="I write clean, modular code strictly adhering to Clean Architecture and SOLID. I have a deep understanding of state management (MVI/MVVM), Jetpack Compose recomposition lifecycles, UI rendering performance optimization, and memory management.">
+              Код пишу чисто и структурированно, строго следуя принципам Clean Architecture и SOLID. Глубоко понимаю механизмы управления состоянием (MVI / MVVM), рекомпозиции в Compose, оптимизацию рендеринга и профилирование утечек памяти.
+            </p>
+            <p class="paragraph" data-ru="Имею опыт коммерческой командной работы, фриланса, поддержки высоконагруженных бортовых медиасистем и разработки защищённых корпоративных мессенджеров на WebSockets." 
+               data-en="Experienced in commercial team development, freelance projects, maintaining high-load in-vehicle media systems, and building secure real-time messaging clients using WebSockets.">
+              Имею опыт коммерческой командной работы, фриланса, поддержки высоконагруженных бортовых медиасистем и разработки защищённых корпоративных мессенджеров на WebSockets.
+            </p>
+
+            <div class="about-points-list">
+              <div class="point-item">
+                <span class="point-icon">⚡</span>
+                <div>
+                  <strong data-ru="Декларативный UI нового поколения:" data-en="Modern Declarative UI:">Декларативный UI нового поколения:</strong>
+                  <span data-ru=" Полный переход на Jetpack Compose и Material 3, кастомная отрисовка на Canvas, fluid-анимации." 
+                        data-en=" Complete proficiency in Jetpack Compose & Material 3, custom Canvas drawing, fluid animations.">
+                    Полный переход на Jetpack Compose и Material 3, кастомная отрисовка на Canvas, fluid-анимации.
+                  </span>
+                </div>
+              </div>
+              <div class="point-item">
+                <span class="point-icon">🏛️</span>
+                <div>
+                  <strong data-ru="Архитектурная дисциплина:" data-en="Architectural Rigor:">Архитектурная дисциплина:</strong>
+                  <span data-ru=" Clean Architecture, чёткое разделение слоёв (Data, Domain, Presentation), MVI с однонаправленным потоком данных (UDF)." 
+                        data-en=" Clean Architecture, clear layer separation (Data, Domain, Presentation), MVI with Unidirectional Data Flow (UDF).">
+                    Clean Architecture, чёткое разделение слоёв (Data, Domain, Presentation), MVI с однонаправленным потоком данных (UDF).
+                  </span>
+                </div>
+              </div>
+              <div class="point-item">
+                <span class="point-icon">🔄</span>
+                <div>
+                  <strong data-ru="Реактивность & Асинхронность:" data-en="Reactivity & Concurrency:">Реактивность & Асинхронность:</strong>
+                  <span data-ru=" Kotlin Coroutines, StateFlow, SharedFlow, отмена корутин, структурированная конкурентность без race condition." 
+                        data-en=" Kotlin Coroutines, StateFlow, SharedFlow, cancellation handling, structured concurrency without race conditions.">
+                    Kotlin Coroutines, StateFlow, SharedFlow, отмена корутин, структурированная конкурентность без race condition.
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="about-action-links">
+              <a href="https://hh.ru/resume/78f4c138ff07c292d00039ed1f6754546c385a" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline btn-hh">
+                <svg viewBox="0 0 24 24" width="16" height="16" class="hh-svg-icon" aria-hidden="true">
+                  <circle cx="12" cy="12" r="12" fill="#ea1b24"/>
+                  <path d="M5.3 7h2v4h2V7h2v10h-2v-4h-2v4h-2V7zm7.4 0h2v4h2V7h2v10h-2v-4h-2v4h-2V7z" fill="#ffffff"/>
+                </svg>
+                <span data-ru="Резюме на HeadHunter (hh.ru) ↗" data-en="HeadHunter Resume (hh.ru) ↗">Резюме на HeadHunter (hh.ru) ↗</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Quick facts sidebar -->
+          <div class="about-sidebar">
+            <div class="card facts-card">
+              <h3 class="card-title" data-ru="Ключевые факты" data-en="Key Facts">Ключевые факты</h3>
+              <ul class="facts-list">
+                <li>
+                  <span class="fact-label" data-ru="Возраст" data-en="Age">Возраст</span>
+                  <span class="fact-value" data-ru="25 лет (2 марта 2001)" data-en="25 y.o. (March 2, 2001)">25 лет (2 марта 2001)</span>
+                </li>
+                <li>
+                  <span class="fact-label" data-ru="Локация" data-en="Location">Локация</span>
+                  <span class="fact-value" data-ru="Москва (м. Саларьево)" data-en="Moscow (Salaryevo)">Москва (м. Саларьево)</span>
+                </li>
+                <li>
+                  <span class="fact-label" data-ru="Гражданство" data-en="Citizenship">Гражданство</span>
+                  <span class="fact-value" data-ru="РФ" data-en="Russian Federation">РФ</span>
+                </li>
+                <li>
+                  <span class="fact-label" data-ru="Формат занятости" data-en="Work Format">Формат занятости</span>
+                  <span class="fact-value" data-ru="Удалённо / Гибрид / Офис" data-en="Remote / Hybrid / On-site">Удалённо / Гибрид / Офис</span>
+                </li>
+                <li>
+                  <span class="fact-label" data-ru="Тип занятости" data-en="Employment Type">Тип занятости</span>
+                  <span class="fact-value" data-ru="Полная, проектная, стажировка" data-en="Full-time, Contract, Internship">Полная, проектная, стажировка</span>
+                </li>
+                <li>
+                  <span class="fact-label" data-ru="Английский язык" data-en="English Level">Английский язык</span>
+                  <span class="fact-value" data-ru="B2 (Средне-продвинутый)" data-en="B2 (Upper-Intermediate)">B2 (Средне-продвинутый)</span>
+                </li>
+                <li>
+                  <span class="fact-label" data-ru="Водительские права" data-en="Driving License">Водительские права</span>
+                  <span class="fact-value" data-ru="Категория B" data-en="Category B">Категория B</span>
+                </li>
+                <li>
+                  <span class="fact-label" data-ru="Профиль HH.ru" data-en="HeadHunter">Профиль HH.ru</span>
+                  <span class="fact-value">
+                    <a href="https://hh.ru/resume/78f4c138ff07c292d00039ed1f6754546c385a" target="_blank" rel="noopener noreferrer" class="link-hh-badge">
+                      <svg viewBox="0 0 24 24" width="16" height="16" class="hh-svg-icon" aria-hidden="true">
+                        <circle cx="12" cy="12" r="12" fill="#ea1b24"/>
+                        <path d="M5.3 7h2v4h2V7h2v10h-2v-4h-2v4h-2V7zm7.4 0h2v4h2V7h2v10h-2v-4h-2v4h-2V7z" fill="#ffffff"/>
+                      </svg>
+                      <span>hh.ru/resume ↗</span>
+                    </a>
+                  </span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Moscow Live Time & Work status -->
+            <div class="card status-card">
+              <div class="timezone-indicator">
+                <div class="clock-circle">
+                  <span class="live-pulse"></span>
+                  <span id="moscowClock">--:--:--</span>
+                </div>
+                <div class="timezone-info">
+                  <span class="tz-label">Moscow Time (UTC+3)</span>
+                  <span class="tz-status" id="workStatus" data-ru="Рабочее время: на связи" data-en="Working hours: Online">Рабочее время: на связи</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="section section-alt" id="skills">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag" data-ru="// СТЕК & НАВЫКИ" data-en="// TECH STACK & SKILLS">// СТЕК & НАВЫКИ</span>
+          <h2 class="section-title" data-ru="Технический стек и экспертиза" data-en="Technical Stack & Expertise">
+            Технический стек и экспертиза
+          </h2>
+          <p class="section-subtitle" data-ru="Инструменты и технологии, с которыми я работаю на коммерческих и собственных проектах." 
+             data-en="Technologies and tools I actively use across commercial, open-source, and personal projects.">
+            Инструменты и технологии, с которыми я работаю на коммерческих и собственных проектах.
+          </p>
+        </div>
+
+        <!-- Skills Filter Tabs -->
+        <div class="filter-tabs-container">
+          <div class="filter-tabs" role="tablist">
+            <button class="filter-tab active" data-filter="all" data-ru="Все технологии" data-en="All Skills">Все технологии</button>
+            <button class="filter-tab" data-filter="android" data-ru="Kotlin & UI" data-en="Kotlin & UI">Kotlin & UI</button>
+            <button class="filter-tab" data-filter="arch" data-ru="Архитектура & Асинхронность" data-en="Architecture & Async">Архитектура & Асинхронность</button>
+            <button class="filter-tab" data-filter="data" data-ru="Сеть & Базы данных" data-en="Network & DB">Сеть & Базы данных</button>
+            <button class="filter-tab" data-filter="tools" data-ru="Инструменты & Прочее" data-en="Tools & Others">Инструменты & Прочее</button>
+          </div>
+        </div>
+
+        <!-- Skills Grid -->
+        <div class="skills-grid" id="skillsGrid">
+          <!-- Kotlin -->
+          <div class="skill-card card" data-category="android">
+            <div class="skill-header">
+              <span class="skill-badge-icon tag-kotlin">Kt</span>
+              <div>
+                <h4 class="skill-name">Kotlin</h4>
+                <span class="skill-level" data-ru="Основной язык" data-en="Core Language">Основной язык</span>
+              </div>
+            </div>
+            <p class="skill-desc" data-ru="Глубокое знание ООП, функциональных конструкций, Coroutines, Flow, DSL, мультиплатформенной разработки (KMP)." 
+               data-en="Deep knowledge of OOP, functional programming, Coroutines, Flow, DSLs, and Kotlin Multiplatform (KMP).">
+              Глубокое знание ООП, функциональных конструкций, Coroutines, Flow, DSL, мультиплатформенной разработки (KMP).
+            </p>
+            <div class="skill-tags">
+              <span>Extension Functions</span>
+              <span>Coroutines</span>
+              <span>Flow</span>
+              <span>KMP</span>
+            </div>
+          </div>
+
+          <!-- Jetpack Compose -->
+          <div class="skill-card card" data-category="android">
+            <div class="skill-header">
+              <span class="skill-badge-icon tag-compose">JC</span>
+              <div>
+                <h4 class="skill-name">Jetpack Compose</h4>
+                <span class="skill-level" data-ru="Декларативный UI" data-en="Declarative UI">Декларативный UI</span>
+              </div>
+            </div>
+            <p class="skill-desc" data-ru="Кастомные UI-компоненты, векторная графика на Canvas, кастомные анимации, устранение лишних рекомпозиций (Stability, DerivedState)." 
+               data-en="Custom UI components, Canvas vector graphics, complex animations, recomposition optimization (Stability, DerivedState).">
+              Кастомные UI-компоненты, векторная графика на Canvas, кастомные анимации, устранение лишних рекомпозиций (Stability, DerivedState).
+            </p>
+            <div class="skill-tags">
+              <span>Recomposition</span>
+              <span>Canvas</span>
+              <span>Animations</span>
+              <span>Material 3</span>
+            </div>
+          </div>
+
+          <!-- Compose Multiplatform -->
+          <div class="skill-card card" data-category="android">
+            <div class="skill-header">
+              <span class="skill-badge-icon tag-cmp">CMP</span>
+              <div>
+                <h4 class="skill-name">Compose Multiplatform</h4>
+                <span class="skill-level" data-ru="Android & Desktop" data-en="Android & Desktop">Android & Desktop</span>
+              </div>
+            </div>
+            <p class="skill-desc" data-ru="Единая кодовая база UI для мобильных устройств (Android) и настольных ОС (Windows / macOS / Linux)." 
+               data-en="Unified declarative UI codebase across mobile devices (Android) and desktop platforms (Windows, macOS, Linux).">
+              Единая кодовая база UI для мобильных устройств (Android) и настольных ОС (Windows / macOS / Linux).
+            </p>
+            <div class="skill-tags">
+              <span>Desktop UI</span>
+              <span>Cross-Platform</span>
+              <span>Shared Code</span>
+            </div>
+          </div>
+
+          <!-- Clean Architecture & MVI/MVVM -->
+          <div class="skill-card card" data-category="arch">
+            <div class="skill-header">
+              <span class="skill-badge-icon tag-arch">🏛️</span>
+              <div>
+                <h4 class="skill-name">Clean Architecture / MVI</h4>
+                <span class="skill-level" data-ru="Паттерны проектирования" data-en="Design Patterns">Паттерны проектирования</span>
+              </div>
+            </div>
+            <p class="skill-desc" data-ru="Разделение на слои Data / Domain / Presentation. Однонаправленный поток данных (UDF), MVI (Intent, State, SideEffect), MVVM." 
+               data-en="Strict layer isolation (Data, Domain, Presentation), Unidirectional Data Flow (UDF), MVI state machines, MVVM.">
+              Разделение на слои Data / Domain / Presentation. Однонаправленный поток данных (UDF), MVI (Intent, State, SideEffect), MVVM.
+            </p>
+            <div class="skill-tags">
+              <span>UDF</span>
+              <span>MVI</span>
+              <span>MVVM</span>
+              <span>SOLID</span>
+            </div>
+          </div>
+
+          <!-- Coroutines & Flow -->
+          <div class="skill-card card" data-category="arch">
+            <div class="skill-header">
+              <span class="skill-badge-icon tag-async">⚡</span>
+              <div>
+                <h4 class="skill-name">Coroutines & Flow</h4>
+                <span class="skill-level" data-ru="Асинхронность" data-en="Asynchronous & Reactive">Асинхронность</span>
+              </div>
+            </div>
+            <p class="skill-desc" data-ru="Структурированная конкурентность (Structured Concurrency), StateFlow, SharedFlow, Dispatchers, обработка исключений и отмена задач." 
+               data-en="Structured concurrency, StateFlow, SharedFlow, custom Dispatchers, exception handling, and cancellation scopes.">
+              Структурированная конкурентность (Structured Concurrency), StateFlow, SharedFlow, Dispatchers, обработка исключений и отмена задач.
+            </p>
+            <div class="skill-tags">
+              <span>StateFlow</span>
+              <span>SharedFlow</span>
+              <span>Scopes</span>
+              <span>Channels</span>
+            </div>
+          </div>
+
+          <!-- Dagger 2 / Hilt -->
+          <div class="skill-card card" data-category="arch">
+            <div class="skill-header">
+              <span class="skill-badge-icon tag-di">💉</span>
+              <div>
+                <h4 class="skill-name">Dagger 2 / Hilt</h4>
+                <span class="skill-level" data-ru="Dependency Injection" data-en="Dependency Injection">Dependency Injection</span>
+              </div>
+            </div>
+            <p class="skill-desc" data-ru="Внедрение зависимостей, модули, области видимости (Scopes), ViewModelComponent, генерация графа зависимостей во время компиляции." 
+               data-en="Compile-time dependency injection, scopes, bindings, ViewModelComponent, multi-module dependency graphs.">
+              Внедрение зависимостей, модули, области видимости (Scopes), ViewModelComponent, генерация графа зависимостей во время компиляции.
+            </p>
+            <div class="skill-tags">
+              <span>Hilt</span>
+              <span>Dagger</span>
+              <span>DI</span>
+              <span>Scopes</span>
+            </div>
+          </div>
+
+          <!-- Room & SQLite -->
+          <div class="skill-card card" data-category="data">
+            <div class="skill-header">
+              <span class="skill-badge-icon tag-db">💾</span>
+              <div>
+                <h4 class="skill-name">Room & SQLite</h4>
+                <span class="skill-level" data-ru="Локальное хранение" data-en="Local Storage">Локальное хранение</span>
+              </div>
+            </div>
+            <p class="skill-desc" data-ru="Офлайн-кэширование, миграции БД, TypeConverters, интеграция с Flow для реактивного обновления UI при изменении данных." 
+               data-en="Offline caching, database migrations, TypeConverters, Flow-based reactive queries for immediate UI sync.">
+              Офлайн-кэширование, миграции БД, TypeConverters, интеграция с Flow для реактивного обновления UI при изменении данных.
+            </p>
+            <div class="skill-tags">
+              <span>Room ORM</span>
+              <span>SQLite</span>
+              <span>Migrations</span>
+              <span>Offline-First</span>
+            </div>
+          </div>
+
+          <!-- Retrofit & WebSockets -->
+          <div class="skill-card card" data-category="data">
+            <div class="skill-header">
+              <span class="skill-badge-icon tag-net">🌐</span>
+              <div>
+                <h4 class="skill-name">Retrofit & WebSockets</h4>
+                <span class="skill-level" data-ru="Сетевой стек" data-en="Network Stack">Сетевой стек</span>
+              </div>
+            </div>
+            <p class="skill-desc" data-ru="REST API, OkHttp интерцепторы, авторизация токенами, WebSocket клиент для обмена сообщениями в реальном времени, сериализация JSON." 
+               data-en="REST APIs, OkHttp interceptors, bearer auth, WebSocket clients for real-time bidirectional communication, JSON serialization.">
+              REST API, OkHttp интерцепторы, авторизация токенами, WebSocket клиент для обмена сообщениями в реальном времени, сериализация JSON.
+            </p>
+            <div class="skill-tags">
+              <span>Retrofit 2</span>
+              <span>OkHttp</span>
+              <span>WebSockets</span>
+              <span>REST API</span>
+            </div>
+          </div>
+
+          <!-- SQL Databases (Postgres, MySQL) -->
+          <div class="skill-card card" data-category="data">
+            <div class="skill-header">
+              <span class="skill-badge-icon tag-sql">🗄️</span>
+              <div>
+                <h4 class="skill-name">SQL Databases</h4>
+                <span class="skill-level" data-ru="Реляционные БД" data-en="Relational DB">Реляционные БД</span>
+              </div>
+            </div>
+            <p class="skill-desc" data-ru="Проектирование схем баз данных, нормализация, написание оптимизированных SQL запросов (PostgreSQL, MySQL, MS SQL)." 
+               data-en="Relational schema modeling, normalization, indexed queries, experience with PostgreSQL, MySQL, MS SQL.">
+              Проектирование схем баз данных, нормализация, написание оптимизированных SQL запросов (PostgreSQL, MySQL, MS SQL).
+            </p>
+            <div class="skill-tags">
+              <span>PostgreSQL</span>
+              <span>MySQL</span>
+              <span>MS SQL</span>
+              <span>Schema Design</span>
+            </div>
+          </div>
+
+          <!-- Java & Android SDK -->
+          <div class="skill-card card" data-category="android">
+            <div class="skill-header">
+              <span class="skill-badge-icon tag-java">☕</span>
+              <div>
+                <h4 class="skill-name">Java & Android SDK</h4>
+                <span class="skill-level" data-ru="Классический стек" data-en="Core & Legacy">Классический стек</span>
+              </div>
+            </div>
+            <p class="skill-desc" data-ru="Services, BroadcastReceivers, ContentProviders, Android Lifecycle, XML Layouts, Material Design, поддержка Java кода." 
+               data-en="Services, BroadcastReceivers, Android Lifecycle, legacy XML layouts, ViewBinding, cross-interoperability with Java.">
+              Services, BroadcastReceivers, Android Lifecycle, legacy XML layouts, ViewBinding, cross-interoperability with Java.
+            </p>
+            <div class="skill-tags">
+              <span>Java</span>
+              <span>XML</span>
+              <span>Android Lifecycle</span>
+              <span>Services</span>
+            </div>
+          </div>
+
+          <!-- QA, ADB & Logcat -->
+          <div class="skill-card card" data-category="tools">
+            <div class="skill-header">
+              <span class="skill-badge-icon tag-tools">🛠️</span>
+              <div>
+                <h4 class="skill-name">ADB, Logcat & QA</h4>
+                <span class="skill-level" data-ru="Отладка и сопровождение" data-en="Debugging & QA">Отладка и сопровождение</span>
+              </div>
+            </div>
+            <p class="skill-desc" data-ru="Глубокая диагностика сбоев и ANR через системные логи, управление тестовыми устройствами через ADB, релизный менеджмент." 
+               data-en="Deep crash & ANR diagnostic analysis using system logs, physical/virtual device management via ADB, release deployment.">
+              Глубокая диагностика сбоев и ANR через системные логи, управление тестовыми устройствами через ADB, релизный менеджмент.
+            </p>
+            <div class="skill-tags">
+              <span>ADB</span>
+              <span>Logcat</span>
+              <span>ANR Analysis</span>
+              <span>Deployment</span>
+            </div>
+          </div>
+
+          <!-- Git & Figma -->
+          <div class="skill-card card" data-category="tools">
+            <div class="skill-header">
+              <span class="skill-badge-icon tag-git">🎨</span>
+              <div>
+                <h4 class="skill-name">Git, GitHub & Figma</h4>
+                <span class="skill-level" data-ru="Рабочий процесс" data-en="Workflow Tools">Рабочий процесс</span>
+              </div>
+            </div>
+            <p class="skill-desc" data-ru="Ветвление (GitFlow), код-ревью, работа с дизайн-системами в Figma, точная вёрстка pixel-perfect под разные экраны." 
+               data-en="Git branching strategies, code reviews, design-system tokens from Figma, responsive pixel-perfect implementations.">
+              Ветвление (GitFlow), код-ревью, работа с дизайн-системами в Figma, точная вёрстка pixel-perfect под разные экраны.
+            </p>
+            <div class="skill-tags">
+              <span>Git</span>
+              <span>GitHub</span>
+              <span>Figma</span>
+              <span>Pixel-Perfect</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Work Experience Section -->
+    <section class="section" id="experience">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag" data-ru="// ОПЫТ РАБОТЫ" data-en="// WORK EXPERIENCE">// ОПЫТ РАБОТЫ</span>
+          <h2 class="section-title" data-ru="Коммерческий и проектный опыт" data-en="Commercial & Project Experience">
+            Коммерческий и проектный опыт
+          </h2>
+          <p class="section-subtitle" data-ru="Реализация продуктовых фич, оптимизация UI и разработка клиент-серверных систем." 
+             data-en="Delivering user features, optimizing reactive interfaces, and architecting client-server systems.">
+            Реализация продуктовых фич, оптимизация UI и разработка клиент-серверных систем.
+          </p>
+        </div>
+
+        <div class="timeline">
+          <!-- Item 1: OptionWay -->
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content card">
+              <div class="timeline-header">
+                <div>
+                  <h3 class="job-role" data-ru="Разработчик / Фриланс" data-en="Android Developer / Freelance">Разработчик / Фриланс</h3>
+                  <div class="company-name">
+                    <span class="company-badge">OptionWay</span>
+                    <span class="company-location" data-ru="Москва • IT & Системная интеграция" data-en="Moscow • IT & Systems Integration">Москва • IT & Системная интеграция</span>
+                  </div>
+                </div>
+                <div class="job-period">
+                  <span class="period-badge" data-ru="Июль 2023 — Ноябрь 2023 (5 мес.)" data-en="July 2023 — Nov 2023 (5 mos)">Июль 2023 — Ноябрь 2023 (5 мес.)</span>
+                </div>
+              </div>
+
+              <ul class="job-duties">
+                <li data-ru="Разработка клиентской части нативных Android-приложений на Kotlin с использованием Jetpack Compose." 
+                    data-en="Engineered client-side native Android applications in Kotlin utilizing Jetpack Compose.">
+                  Разработка клиентской части нативных Android-приложений на Kotlin с использованием Jetpack Compose.
+                </li>
+                <li data-ru="Реализация реактивного UI, кастомных анимаций и переиспользуемых UI-компонентов в рамках дизайн-системы." 
+                    data-en="Implemented reactive UI, fluid custom animations, and reusable design-system components.">
+                  Реализация реактивного UI, кастомных анимаций и переиспользуемых UI-компонентов в рамках дизайн-системы.
+                </li>
+                <li data-ru="Интеграция клиент-серверного взаимодействия через REST API (Retrofit / JSON) с обработкой ошибок и кэшированием." 
+                    data-en="Integrated client-server networking via REST API (Retrofit / JSON) with resilient error handling and caching.">
+                  Интеграция клиент-серверного взаимодействия через REST API (Retrofit / JSON) с обработкой ошибок и кэшированием.
+                </li>
+                <li data-ru="Настройка локального хранения данных и реактивного слоя кэша на Room ORM." 
+                    data-en="Configured local data storage and offline caching layer backed by Room ORM and Coroutines Flow.">
+                  Настройка локального хранения данных и реактивного слоя кэша на Room ORM.
+                </li>
+                <li data-ru="Совместная работа с дизайнерами по макетам в Figma, адаптация интерфейсов под различные диагонали экранов." 
+                    data-en="Collaborated closely with designers using Figma to adapt UI seamlessly across different screen sizes.">
+                  Совместная работа с дизайнерами по макетам в Figma, адаптация интерфейсов под различные диагонали экранов.
+                </li>
+              </ul>
+
+              <div class="job-stack">
+                <span class="stack-chip">Kotlin</span>
+                <span class="stack-chip">Jetpack Compose</span>
+                <span class="stack-chip">Retrofit 2</span>
+                <span class="stack-chip">Room</span>
+                <span class="stack-chip">Coroutines & Flow</span>
+                <span class="stack-chip">Figma</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 2: 22Byte -->
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content card">
+              <div class="timeline-header">
+                <div>
+                  <h3 class="job-role" data-ru="Android-разработчик (Проектная занятость)" data-en="Android Developer (Contract)">Android-разработчик (Проектная занятость)</h3>
+                  <div class="company-name">
+                    <span class="company-badge">22Byte</span>
+                    <span class="company-location" data-ru="Москва • Разработка ПО & ИТ-консалтинг" data-en="Moscow • Software Dev & IT Consulting">Москва • Разработка ПО & ИТ-консалтинг</span>
+                  </div>
+                </div>
+                <div class="job-period">
+                  <span class="period-badge" data-ru="Сентябрь 2023 — Октябрь 2023 (2 мес.)" data-en="Sept 2023 — Oct 2023 (2 mos)">Сентябрь 2023 — Октябрь 2023 (2 мес.)</span>
+                </div>
+              </div>
+
+              <ul class="job-duties">
+                <li data-ru="Разработка интерактивных модулей и игровых механик на Jetpack Compose с кастомной векторной отрисовкой." 
+                    data-en="Developed interactive feature modules and mini-game mechanics in Jetpack Compose using custom vector rendering.">
+                  Разработка интерактивных модулей и игровых механик на Jetpack Compose с кастомной векторной отрисовкой.
+                </li>
+                <li data-ru="Управление состоянием интерфейса по архитектуре MVI / MVVM, оптимизация рекомпозиций и производительности рендеринга." 
+                    data-en="Architected state management via MVI/MVVM, thoroughly optimized recompositions and frame rendering performance.">
+                  Управление состоянием интерфейса по архитектуре MVI / MVVM, оптимизация рекомпозиций и производительности рендеринга.
+                </li>
+                <li data-ru="Векторная отрисовка на Canvas и интеграция графических ассетов." 
+                    data-en="Canvas vector drawing and seamless asset integration into composable components.">
+                  Векторная отрисовка на Canvas и интеграция графических ассетов.
+                </li>
+              </ul>
+
+              <div class="job-stack">
+                <span class="stack-chip">Kotlin</span>
+                <span class="stack-chip">Jetpack Compose</span>
+                <span class="stack-chip">MVI Architecture</span>
+                <span class="stack-chip">Canvas & Vector Graphics</span>
+                <span class="stack-chip">StateFlow</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 3: TheDoctorTeam -->
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content card">
+              <div class="timeline-header">
+                <div>
+                  <h3 class="job-role" data-ru="Java / Kotlin Developer (Волонтёрский проект)" data-en="Java / Kotlin Developer (Volunteer)">Java / Kotlin Developer (Волонтёрский проект)</h3>
+                  <div class="company-name">
+                    <a href="https://thedoctorteam.ru" target="_blank" rel="noopener noreferrer" class="company-badge link-badge">
+                      TheDoctorTeam (thedoctorteam.ru) ↗
+                    </a>
+                    <span class="company-location" data-ru="Мобильный медиасервис" data-en="Mobile Media Service">Мобильный медиасервис</span>
+                  </div>
+                </div>
+                <div class="job-period">
+                  <span class="period-badge current" data-ru="Октябрь 2021 — настоящее время" data-en="Oct 2021 — Present">Октябрь 2021 — настоящее время</span>
+                </div>
+              </div>
+
+              <ul class="job-duties">
+                <li data-ru="Разработка и поддержка нативного мобильного приложения для стриминга и просмотра анимационных сериалов." 
+                    data-en="Building and maintaining the native Android application for streaming cartoons and animated series.">
+                  Разработка и поддержка нативного мобильного приложения для стриминга и просмотра анимационных сериалов.
+                </li>
+                <li data-ru="Проектирование и доработка UX/UI дизайна приложения, адаптация под современные стандарты Material Design." 
+                    data-en="Designed and refined UX/UI flows according to modern Material Design guidelines.">
+                  Проектирование и доработка UX/UI дизайна приложения, адаптация под современные стандарты Material Design.
+                </li>
+                <li data-ru="Интеграция медиаплеера, управление фоновым воспроизведением и кэширование списка эпизодов." 
+                    data-en="Integrated video playback, background audio control, and episode metadata caching.">
+                  Интеграция медиаплеера, управление фоновым воспроизведением и кэширование списка эпизодов.
+                </li>
+              </ul>
+
+              <div class="job-stack">
+                <span class="stack-chip">Kotlin</span>
+                <span class="stack-chip">Android SDK</span>
+                <span class="stack-chip">ExoPlayer / Media3</span>
+                <span class="stack-chip">REST API</span>
+                <span class="stack-chip">UX/UI</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 4: ООО Профцентр СПЕЦИАЛИСТ -->
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content card">
+              <div class="timeline-header">
+                <div>
+                  <h3 class="job-role" data-ru="Инженер по сопровождению ПО / Android QA & Deployment" data-en="Software Support Engineer / Android QA & Deployment">Инженер по сопровождению ПО / Android QA & Deployment</h3>
+                  <div class="company-name">
+                    <a href="https://nebo.digital" target="_blank" rel="noopener noreferrer" class="company-badge link-badge">
+                      ООО «Профцентр СПЕЦИАЛИСТ» (Nebo-digital) ↗
+                    </a>
+                    <span class="company-location" data-ru="Москва • Бортовые медиасистемы" data-en="Moscow • In-vehicle Media Systems">Москва • Бортовые медиасистемы</span>
+                  </div>
+                </div>
+                <div class="job-period">
+                  <span class="period-badge" data-ru="Июль 2021 — Октябрь 2021 (4 мес.)" data-en="July 2021 — Oct 2021 (4 mos)">Июль 2021 — Октябрь 2021 (4 мес.)</span>
+                </div>
+              </div>
+
+              <ul class="job-duties">
+                <li data-ru="Тестирование, сопровождение и релизный менеджмент Android-приложений для цифровых бортовых медиасистем." 
+                    data-en="Testing, maintenance, and release management of Android applications for digital in-vehicle media systems.">
+                  Тестирование, сопровождение и релизный менеджмент Android-приложений для цифровых бортовых медиасистем.
+                </li>
+                <li data-ru="Глубокая диагностика сбоев и багов через детальный анализ системных логов (Logcat, ADB, ANR-трейсы)." 
+                    data-en="Diagnosed critical system crashes, memory leaks, and ANRs via Logcat, ADB, and stack trace inspection.">
+                  Глубокая диагностика сбоев и багов через детальный анализ системных логов (Logcat, ADB, ANR-трейсы).
+                </li>
+                <li data-ru="Контроль стабильности работы UI и фоновых служб (Services) непрерывной доставки медиаконтента." 
+                    data-en="Monitored continuous background service delivery of media content and high UI responsiveness.">
+                  Контроль стабильности работы UI и фоновых служб (Services) непрерывной доставки медиаконтента.
+                </li>
+              </ul>
+
+              <div class="job-stack">
+                <span class="stack-chip">Android SDK</span>
+                <span class="stack-chip">Logcat</span>
+                <span class="stack-chip">ADB</span>
+                <span class="stack-chip">Background Services</span>
+                <span class="stack-chip">QA & Release</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 5: AVSoft -->
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content card">
+              <div class="timeline-header">
+                <div>
+                  <h3 class="job-role" data-ru="Android / Java Developer" data-en="Android / Java Developer">Android / Java Developer</h3>
+                  <div class="company-name">
+                    <a href="https://avsw.ru" target="_blank" rel="noopener noreferrer" class="company-badge link-badge">
+                      ООО «AVSoft» (avsw.ru) ↗
+                    </a>
+                    <span class="company-location" data-ru="Москва • Кибербезопасность & Защищенное ПО" data-en="Moscow • Cyber Security & Software">Москва • Кибербезопасность & Защищенное ПО</span>
+                  </div>
+                </div>
+                <div class="job-period">
+                  <span class="period-badge" data-ru="Июнь 2020 — Июнь 2021 (1 год 1 мес.)" data-en="June 2020 — June 2021 (1 yr 1 mo)">Июнь 2020 — Июнь 2021 (1 год 1 мес.)</span>
+                </div>
+              </div>
+
+              <ul class="job-duties">
+                <li data-ru="Разработка и сопровождение нативного клиента защищённого корпоративного мессенджера под Android (Java / Android SDK)." 
+                    data-en="Developed and maintained native secure corporate messenger client for Android (Java / Android SDK).">
+                  Разработка и сопровождение нативного клиента защищённого корпоративного мессенджера под Android (Java / Android SDK).
+                </li>
+                <li data-ru="Реализация сетевого взаимодействия с бэкендом (WebSockets, REST API) для обмена сообщениями и статусами в реальном времени." 
+                    data-en="Engineered bidirectional network communication with backend via WebSockets & REST APIs for real-time messaging.">
+                  Реализация сетевого взаимодействия с бэкендом (WebSockets, REST API) для обмена сообщениями и статусами в реальном времени.
+                </li>
+                <li data-ru="Участие в разработке серверных модулей на Java: проектирование бизнес-логики, обработка клиентских сессий." 
+                    data-en="Contributed to Java backend modules: designed business logic and handled concurrent client sessions.">
+                  Участие в разработке серверных модулей на Java: проектирование бизнес-логики, обработка клиентских сессий.
+                </li>
+                <li data-ru="Проектирование реляционной схемы БД для безопасного хранения истории переписки и локального кэша." 
+                    data-en="Designed relational database schema for storing message history securely and fast local cache retrieval.">
+                  Проектирование реляционной схемы БД для безопасного хранения истории переписки и локального кэша.
+                </li>
+              </ul>
+
+              <div class="job-stack">
+                <span class="stack-chip">Java</span>
+                <span class="stack-chip">Android SDK</span>
+                <span class="stack-chip">WebSockets</span>
+                <span class="stack-chip">REST API</span>
+                <span class="stack-chip">SQLite</span>
+                <span class="stack-chip">Backend Integration</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="section section-alt" id="projects">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag" data-ru="// ПОРТФОЛИО ПРОЕКТОВ" data-en="// PROJECTS PORTFOLIO">// ПОРТФОЛИО ПРОЕКТОВ</span>
+          <h2 class="section-title" data-ru="Проекты и разработки" data-en="Featured Projects & Open Source">
+            Проекты и разработки
+          </h2>
+          <p class="section-subtitle" data-ru="Приложения, демонстрирующие архитектуру, декларативный UI и работу с платформой." 
+             data-en="Showcasing architecture patterns, declarative UI mastery, and multiplatform implementations.">
+            Приложения, демонстрирующие архитектуру, декларативный UI и работу с платформой.
+          </p>
+        </div>
+
+        <div class="projects-grid">
+          <!-- Project 1: Codenames -->
+          <div class="project-card card" data-project="codenames">
+            <div class="project-preview preview-codenames">
+              <div class="project-mockup-badge" data-ru="Desktop & Мобильная" data-en="Compose Desktop & Mobile">Desktop & Мобильная</div>
+              <div class="mockup-screen">
+                <div class="codenames-grid-preview">
+                  <div class="code-tile tile-blue" data-ru="ШПИОН" data-en="SPY">ШПИОН</div>
+                  <div class="code-tile tile-red" data-ru="АГЕНТ" data-en="AGENT">АГЕНТ</div>
+                  <div class="code-tile tile-neutral" data-ru="МИРНЫЙ" data-en="PASS">МИРНЫЙ</div>
+                  <div class="code-tile tile-black" data-ru="УБИЙЦА" data-en="ASSASSIN">УБИЙЦА</div>
+                </div>
+              </div>
+            </div>
+            <div class="project-body">
+              <div class="project-meta">
+                <span class="project-tag">Jetpack Compose</span>
+                <span class="project-tag">Desktop</span>
+              </div>
+              <h3 class="project-title" data-ru="Codenames" data-en="Codenames Desktop">Codenames</h3>
+              <p class="project-desc" data-ru="Цифровая адаптация всемирно известной настольной игры «Codenames». Кастомный декларативный UI на Compose Multiplatform Desktop, плавная анимация переворота карточек и поддержка многопользовательского режима." 
+                 data-en="Digital desktop adaptation of the award-winning board game 'Codenames'. Custom declarative UI in Compose Multiplatform, flip card animations, and game state machine.">
+                Цифровая адаптация всемирно известной настольной игры «Codenames». Кастомный декларативный UI на Compose Multiplatform Desktop, плавная анимация переворота карточек и поддержка многопользовательского режима.
+              </p>
+              <div class="project-tech-list">
+                <span>Kotlin</span>
+                <span>Compose Desktop</span>
+                <span>MVI</span>
+                <span>Coroutines</span>
+              </div>
+              <div class="project-actions">
+                <a href="https://github.com/AdisAlagic/CodenamesProject" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                  <span>GitHub</span>
+                </a>
+                <button class="btn btn-sm btn-secondary open-project-modal" data-modal="codenames" data-ru="Подробнее" data-en="Details">Подробнее</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 2: TutiCalendar -->
+          <div class="project-card card" data-project="tuticalendar">
+            <div class="project-preview preview-tuticalendar">
+              <div class="project-mockup-badge" data-ru="Android-приложение" data-en="Android App">Android-приложение</div>
+              <div class="mockup-screen">
+                <div class="calendar-mini-preview">
+                  <div class="cal-header" data-ru="🎂 Кондитерская Tuti" data-en="🎂 Tuti Bakery">🎂 Кондитерская Tuti</div>
+                  <div class="cal-days-row">
+                    <span class="active-deadline" data-ru="14 [Заказ #102]" data-en="14 [Order #102]">14 [Заказ #102]</span>
+                    <span class="active-ready" data-ru="15 [Готов]" data-en="15 [Ready]">15 [Готов]</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="project-body">
+              <div class="project-meta">
+                <span class="project-tag">Jetpack Compose</span>
+                <span class="project-tag">Room</span>
+              </div>
+              <div class="project-status-wrapper">
+                <span class="status-tag status-closed" data-ru="🔒 Closed Source" data-en="🔒 Closed Source">🔒 Closed Source</span>
+              </div>
+              <h3 class="project-title" data-ru="TutiCalendar" data-en="TutiCalendar">TutiCalendar</h3>
+              <p class="project-desc" data-ru="Интерактивный планировщик и трекер дедлайнов для кондитерской (коммерческий проект). Удобное отображение загрузки цеха по дням, автоматический расчёт сроков готовности тортов и десертов, фильтрация заказов." 
+                 data-en="Specialized deadline and order planner for a confectionery studio (commercial project). Daily bakery workload visualization, status indicators, and offline database persistence.">
+                Интерактивный планировщик и трекер дедлайнов для кондитерской (коммерческий проект). Удобное отображение загрузки цеха по дням, автоматический расчёт сроков готовности тортов и десертов, фильтрация заказов.
+              </p>
+              <div class="project-tech-list">
+                <span>Kotlin</span>
+                <span>Jetpack Compose</span>
+                <span>Room Database</span>
+                <span>Clean Arch</span>
+              </div>
+              <div class="project-actions">
+                <span class="btn btn-sm btn-disabled-status" title="Закрытый коммерческий проект">
+                  <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+                  <span data-ru="Закрытый проект" data-en="Closed Source">Закрытый проект</span>
+                </span>
+                <button class="btn btn-sm btn-secondary open-project-modal" data-modal="tuticalendar" data-ru="Подробнее" data-en="Details">Подробнее</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 3: KuTube -->
+          <div class="project-card card" data-project="kutube">
+            <div class="project-preview preview-kutube">
+              <div class="project-mockup-badge" data-ru="Медиаплеер" data-en="Media Player">Медиаплеер</div>
+              <div class="mockup-screen">
+                <div class="player-mini-preview">
+                  <div class="player-icon">▶</div>
+                  <div class="player-bar"><span class="bar-progress"></span></div>
+                </div>
+              </div>
+            </div>
+            <div class="project-body">
+              <div class="project-meta">
+                <span class="project-tag">Jetpack Compose</span>
+                <span class="project-tag">ExoPlayer</span>
+              </div>
+              <div class="project-status-wrapper">
+                <span class="status-tag status-wip" data-ru="🚧 В разработке" data-en="🚧 In Development">🚧 В разработке</span>
+              </div>
+              <h3 class="project-title" data-ru="KuTube" data-en="KuTube Client">KuTube</h3>
+              <p class="project-desc" data-ru="Легковесный и быстрый неофициальный клиент YouTube без перегруженного интерфейса. Плавный рендеринг списков на LazyColumn, кэширование превью и кастомный контроллер видео." 
+                 data-en="Lightweight and sleek custom YouTube client. Smooth 60fps LazyColumn feeds, background audio buffering, and custom gestures for playback controls.">
+                Легковесный и быстрый неофициальный клиент YouTube без перегруженного интерфейса. Плавный рендеринг списков на LazyColumn, кэширование превью и кастомный контроллер видео.
+              </p>
+              <div class="project-tech-list">
+                <span>Kotlin</span>
+                <span>Jetpack Compose</span>
+                <span>Media3 / ExoPlayer</span>
+                <span>REST API</span>
+              </div>
+              <div class="project-actions">
+                <a href="https://github.com/AdisAlagic" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                  <span>GitHub</span>
+                </a>
+                <button class="btn btn-sm btn-secondary open-project-modal" data-modal="kutube" data-ru="Подробнее" data-en="Details">Подробнее</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 4: Shadows of Equestria -->
+          <div class="project-card card" data-project="shadows">
+            <div class="project-preview preview-shadows">
+              <div class="project-mockup-badge" data-ru="TTRPG Компаньон" data-en="TTRPG Companion">TTRPG Компаньон</div>
+              <div class="mockup-screen">
+                <div class="rpg-mini-preview">
+                  <div class="rpg-stat">HP: 100/100</div>
+                  <div class="rpg-stat">MONOCHROME: 85/85</div>
+                </div>
+              </div>
+            </div>
+            <div class="project-body">
+              <div class="project-meta">
+                <span class="project-tag">Jetpack Compose</span>
+                <span class="project-tag">StateFlow</span>
+              </div>
+              <div class="project-status-wrapper">
+                <span class="status-tag status-wip" data-ru="🚧 В разработке" data-en="🚧 In Development">🚧 В разработке</span>
+              </div>
+              <h3 class="project-title">Тени Эквестрии: Последний отблеск</h3>
+              <p class="project-desc" data-ru="Цифровой ассистент мастера и игроков для настольной ролевой игры. Интерактивные счетчики характеристик, система инвентаря, генератор бросков кубиков и хранилище правил." 
+                 data-en="Digital companion app for tabletop RPG masters and players. Real-time attribute counters, inventory system, dice rollers, and rulebook search.">
+                Цифровой ассистент мастера и игроков для настольной ролевой игры. Интерактивные счетчики характеристик, система инвентаря, генератор бросков кубиков и хранилище правил.
+              </p>
+              <div class="project-tech-list">
+                <span>Kotlin</span>
+                <span>Jetpack Compose</span>
+                <span>StateFlow</span>
+                <span>Material 3</span>
+              </div>
+              <div class="project-actions">
+                <a href="https://github.com/AdisAlagic" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                  <span>GitHub</span>
+                </a>
+                <button class="btn btn-sm btn-secondary open-project-modal" data-modal="shadows" data-ru="Подробнее" data-en="Details">Подробнее</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 5: MiniTextRPG -->
+          <div class="project-card card" data-project="minitextrpg">
+            <div class="project-preview preview-minitextrpg">
+              <div class="project-mockup-badge" data-ru="Текстовая RPG & CTF" data-en="Android RPG & CTF">Текстовая RPG & CTF</div>
+              <div class="mockup-screen">
+                <div class="textrpg-mini-preview">
+                  <div class="rpg-log-line" data-ru="⚔️ Атака на 2850 урона" data-en="⚔️ Attack for 2850 dmg">⚔️ Атака на 2850 урона</div>
+                  <div class="rpg-log-sub" data-ru="Marcus HP: 0 ❤️ [Победа]" data-en="Marcus HP: 0 ❤️ [Victory]">Marcus HP: 0 ❤️ [Победа]</div>
+                </div>
+              </div>
+            </div>
+            <div class="project-body">
+              <div class="project-meta">
+                <span class="project-tag">Jetpack Compose</span>
+                <span class="project-tag">NDK / C++</span>
+              </div>
+              <h3 class="project-title">MiniTextRPG</h3>
+              <p class="project-desc" data-ru="Пошаговая текстовая RPG на Jetpack Compose с механикой исследования замка, инвентарем и скрытым CTF-челленджем: защита ключа на C++ через NDK и плагин Hidden Secrets." 
+                 data-en="Turn-based text RPG in Jetpack Compose featuring dungeon exploration, loot inventory, and an embedded Android CTF/reverse-engineering challenge with C++ NDK obfuscation.">
+                Пошаговая текстовая RPG на Jetpack Compose с механикой исследования замка, инвентарем и скрытым CTF-челленджем: защита ключа на C++ через NDK и плагин Hidden Secrets.
+              </p>
+              <div class="project-tech-list">
+                <span>Kotlin</span>
+                <span>Jetpack Compose</span>
+                <span>Android NDK</span>
+                <span>C++ / CMake</span>
+              </div>
+              <div class="project-actions">
+                <a href="https://github.com/AdisAlagic/minitextrpg" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                  <span>GitHub</span>
+                </a>
+                <button class="btn btn-sm btn-secondary open-project-modal" data-modal="minitextrpg" data-ru="Подробнее" data-en="Details">Подробнее</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Code Spotlight / Architecture Showcase Section -->
+    <section class="section" id="code">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag" data-ru="// СТИЛЬ КОДА & АРХИТЕКТУРА" data-en="// CODE STYLE & ARCHITECTURE">// СТИЛЬ КОДА & АРХИТЕКТУРА</span>
+          <h2 class="section-title" data-ru="Как я пишу код на Kotlin & Jetpack Compose" data-en="How I Write Kotlin & Jetpack Compose">
+            Как я пишу код на Kotlin & Jetpack Compose
+          </h2>
+          <p class="section-subtitle" data-ru="Пример реактивного MVI компонента с безопасным управлением состоянием и чистой структурой." 
+             data-en="Example of a reactive MVI component with type-safe state management and Clean Architecture.">
+            Пример реактивного MVI компонента с безопасным управлением состоянием и чистой структурой.
+          </p>
+        </div>
+
+        <div class="code-showcase-container card">
+          <div class="code-header">
+            <div class="code-tab-buttons">
+              <button class="code-tab active" data-tab="compose-ui">ProfileScreen.kt (Compose UI)</button>
+              <button class="code-tab" data-tab="mvi-vm">ProfileViewModel.kt (MVI)</button>
+              <button class="code-tab" data-tab="repo-flow">UserRepository.kt (Coroutines Flow)</button>
+            </div>
+            <div class="code-actions">
+              <span class="code-lang-label">Kotlin 2.0</span>
+              <button class="btn-copy-code" id="copyCodeBtn" title="Скопировать код">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                <span id="copyCodeText">Copy</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="code-content-area">
+            <!-- Tab 1: Compose UI -->
+            <pre class="code-block active" id="code-compose-ui"><code><span class="k-keyword">@Composable</span>
+<span class="k-keyword">fun</span> <span class="k-func">ProfileScreen</span>(
+    viewModel: <span class="k-type">ProfileViewModel</span> = hiltViewModel(),
+    onNavigateBack: () -&gt; <span class="k-type">Unit</span>
+) {
+    <span class="k-comment">// State hoist with lifecycle-aware collection</span>
+    <span class="k-keyword">val</span> state <span class="k-keyword">by</span> viewModel.uiState.<span class="k-func">collectAsStateWithLifecycle</span>()
+
+    <span class="k-comment">// One-shot side-effects (Snackbar, navigation)</span>
+    <span class="k-keyword">val</span> snackbarHostState = remember { <span class="k-type">SnackbarHostState</span>() }
+    <span class="k-func">LaunchedEffect</span>(viewModel.effect) {
+        viewModel.effect.<span class="k-func">collect</span> { effect -&gt;
+            <span class="k-keyword">when</span> (effect) {
+                <span class="k-keyword">is</span> ProfileEffect.<span class="k-type">ShowToast</span> -&gt; snackbarHostState.<span class="k-func">showSnackbar</span>(effect.message)
+                ProfileEffect.<span class="k-type">NavBack</span> -&gt; onNavigateBack()
+            }
+        }
+    }
+
+    <span class="k-type">Scaffold</span>(
+        snackbarHost = { <span class="k-type">SnackbarHost</span>(hostState = snackbarHostState) },
+        topBar = { <span class="k-func">TopAppBar</span>(title = { <span class="k-type">Text</span>(<span class="k-string">"Developer Profile"</span>) }) }
+    ) { paddingValues -&gt;
+        <span class="k-keyword">when</span> (state) {
+            <span class="k-keyword">is</span> ProfileState.<span class="k-type">Loading</span> -&gt; <span class="k-func">CircularProgressIndicator</span>()
+            <span class="k-keyword">is</span> ProfileState.<span class="k-type">Success</span> -&gt; {
+                <span class="k-func">ProfileContent</span>(
+                    data = state.profile,
+                    onRefresh = { viewModel.<span class="k-func">handleIntent</span>(ProfileIntent.<span class="k-type">Refresh</span>) },
+                    modifier = Modifier.<span class="k-func">padding</span>(paddingValues)
+                )
+            }
+            <span class="k-keyword">is</span> ProfileState.<span class="k-type">Error</span> -&gt; <span class="k-func">ErrorStateView</span>(msg = state.error)
+        }
+    }
+}</code></pre>
+
+            <!-- Tab 2: ViewModel MVI -->
+            <pre class="code-block" id="code-mvi-vm"><code><span class="k-keyword">@HiltViewModel</span>
+<span class="k-keyword">class</span> <span class="k-type">ProfileViewModel</span> <span class="k-keyword">@Inject constructor</span>(
+    <span class="k-keyword">private val</span> getProfileUseCase: <span class="k-type">GetProfileUseCase</span>
+) : <span class="k-type">ViewModel</span>() {
+
+    <span class="k-keyword">private val</span> _uiState = <span class="k-func">MutableStateFlow</span>&lt;<span class="k-type">ProfileState</span>&gt;(ProfileState.Loading)
+    <span class="k-keyword">val</span> uiState: <span class="k-type">StateFlow</span>&lt;<span class="k-type">ProfileState</span>&gt; = _uiState.<span class="k-func">asStateFlow</span>()
+
+    <span class="k-keyword">private val</span> _effect = <span class="k-func">Channel</span>&lt;<span class="k-type">ProfileEffect</span>&gt;()
+    <span class="k-keyword">val</span> effect = _effect.<span class="k-func">receiveAsFlow</span>()
+
+    <span class="k-keyword">fun</span> <span class="k-func">handleIntent</span>(intent: <span class="k-type">ProfileIntent</span>) {
+        <span class="k-keyword">when</span> (intent) {
+            ProfileIntent.<span class="k-type">Refresh</span> -&gt; <span class="k-func">loadProfileData</span>()
+            <span class="k-keyword">is</span> ProfileIntent.<span class="k-type">SelectProject</span> -&gt; <span class="k-func">onProjectClicked</span>(intent.id)
+        }
+    }
+
+    <span class="k-keyword">private fun</span> <span class="k-func">loadProfileData</span>() = viewModelScope.<span class="k-func">launch</span> {
+        _uiState.value = ProfileState.Loading
+        getProfileUseCase()
+            .<span class="k-func">catch</span> { e -&gt; _uiState.value = ProfileState.Error(e.localizedMessage) }
+            .<span class="k-func">collect</span> { profile -&gt;
+                _uiState.value = ProfileState.Success(profile)
+            }
+    }
+}</code></pre>
+
+            <!-- Tab 3: Repository Coroutines Flow -->
+            <pre class="code-block" id="code-repo-flow"><code><span class="k-keyword">class</span> <span class="k-type">UserRepositoryImpl</span> <span class="k-keyword">@Inject constructor</span>(
+    <span class="k-keyword">private val</span> localDao: <span class="k-type">UserDao</span>,
+    <span class="k-keyword">private val</span> api: <span class="k-type">ApiService</span>,
+    <span class="k-keyword">private val</span> ioDispatcher: <span class="k-type">CoroutineDispatcher</span> = Dispatchers.IO
+) : <span class="k-type">UserRepository</span> {
+
+    <span class="k-comment">// Offline-first reactive data flow</span>
+    <span class="k-keyword">override fun</span> <span class="k-func">getUserProfile</span>(): <span class="k-type">Flow</span>&lt;<span class="k-type">UserProfile</span>&gt; = flow {
+        <span class="k-comment">// 1. Emit cached data immediately</span>
+        <span class="k-keyword">val</span> cached = localDao.<span class="k-func">getUser</span>()
+        <span class="k-keyword">if</span> (cached != <span class="k-keyword">null</span>) <span class="k-func">emit</span>(cached.<span class="k-func">toDomain</span>())
+
+        <span class="k-comment">// 2. Fetch fresh network data in background</span>
+        <span class="k-keyword">val</span> remote = api.<span class="k-func">fetchProfile</span>()
+        localDao.<span class="k-func">insertUser</span>(remote.<span class="k-func">toEntity</span>())
+
+        <span class="k-comment">// 3. Emit fresh data</span>
+        <span class="k-func">emit</span>(remote.<span class="k-func">toDomain</span>())
+    }.<span class="k-func">flowOn</span>(ioDispatcher)
+}</code></pre>
+          </div>
+
+          <!-- Interactive Interactive Demo Pill -->
+          <div class="code-interactive-banner">
+            <span class="banner-badge">Interactive</span>
+            <span class="banner-text" data-ru="Декларативность Compose позволяет мгновенно реагировать на события и исключить гонки состояний." 
+                  data-en="Compose's declarative paradigm eliminates race conditions with predictable state flow.">
+              Декларативность Compose позволяет мгновенно реагировать на события и исключить гонки состояний.
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education & Hackathons Section -->
+    <section class="section section-alt" id="education">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag" data-ru="// ОБРАЗОВАНИЕ & ДОСТИЖЕНИЯ" data-en="// EDUCATION & ACHIEVEMENTS">// ОБРАЗОВАНИЕ & ДОСТИЖЕНИЯ</span>
+          <h2 class="section-title" data-ru="Образование и хакатоны" data-en="Education & Hackathons">
+            Образование и хакатоны
+          </h2>
+          <p class="section-subtitle" data-ru="Фундаментальная подготовка в сетях и ПО, интенсивное обучение в «Школе 21» и соревновательный опыт." 
+             data-en="Solid foundation in computer networks, intensive software engineering at School 21, and competitive hackathon experience.">
+            Фундаментальная подготовка в сетях и ПО, интенсивное обучение в «Школе 21» и соревновательный опыт.
+          </p>
+        </div>
+
+        <div class="edu-hack-grid">
+          <!-- Education Column -->
+          <div class="edu-column">
+            <h3 class="col-title" data-ru="🎓 Образование & Курсы" data-en="🎓 Education & Courses">🎓 Образование & Курсы</h3>
+
+            <div class="edu-card card">
+              <div class="edu-period">2017 — 2021</div>
+              <h4 class="edu-institution">КПИТ МИРЭА (РТУ МИРЭА)</h4>
+              <div class="edu-degree" data-ru="Программирование в компьютерных сетях" data-en="Computer Network Programming">Программирование в компьютерных сетях</div>
+              <div class="edu-status" data-ru="Квалификация: Техник-программист" data-en="Qualification: Software & Network Technician">Квалификация: Техник-программист</div>
+              <p class="edu-desc" data-ru="Профильное среднее специальное образование. Сетевые протоколы (TCP/IP), системное администрирование, основы ООП, базы данных и разработка ПО." 
+                 data-en="Technical college degree. Networking protocols, system administration, object-oriented programming, databases, and software fundamentals.">
+                Профильное среднее специальное образование. Сетевые протоколы (TCP/IP), системное администрирование, основы ООП, базы данных и разработка ПО.
+              </p>
+            </div>
+
+            <div class="edu-card card">
+              <div class="edu-period" data-ru="2023 — н.в." data-en="2023 — Present">2023 — н.в.</div>
+              <h4 class="edu-institution">Школа 21 (Сбербанк)</h4>
+              <div class="edu-degree" data-ru="Интенсив & Программа разработки ПО" data-en="Software Engineering Intensive & Peer-to-Peer">Интенсив & Программа разработки ПО</div>
+              <div class="edu-status" data-ru="Повышение квалификации / Программист" data-en="Advanced Professional Development">Повышение квалификации / Программист</div>
+              <p class="edu-desc" data-ru="Глубокое погружение в алгоритмическую базу, C/C++, управление памятью, командную разработку по методологии peer-to-peer без преподавателей." 
+                 data-en="Deep dive into algorithms, C/C++, low-level memory management, and peer-to-peer collaborative software development.">
+                Глубокое погружение в алгоритмическую базу, C/C++, управление памятью, командную разработку по методологии peer-to-peer без преподавателей.
+              </p>
+            </div>
+          </div>
+
+          <!-- Hackathons Column -->
+          <div class="hack-column">
+            <h3 class="col-title" data-ru="🏆 Мероприятия & Хакатоны" data-en="🏆 Hackathons & Competitions">🏆 Мероприятия & Хакатоны</h3>
+
+            <div class="hackathons-container card">
+              <p class="hack-intro" data-ru="Активный участник IT-хакатонов, командных спринтов и технологических соревнований:" 
+                 data-en="Active participant in competitive tech hackathons and product sprints:">
+                Активный участник IT-хакатонов, командных спринтов и технологических соревнований:
+              </p>
+
+              <div class="hack-items-list">
+                <div class="hack-item">
+                  <div class="hack-badge">2025</div>
+                  <div class="hack-info">
+                    <strong class="hack-name">Внедрейд</strong>
+                    <span class="hack-role" data-ru="Участник инженерного хакатона" data-en="Engineering Hackathon Participant">Участник инженерного хакатона</span>
+                  </div>
+                </div>
+
+                <div class="hack-item">
+                  <div class="hack-badge">2023</div>
+                  <div class="hack-info">
+                    <strong class="hack-name">Hack&Change</strong>
+                    <span class="hack-role" data-ru="Участник всероссийского хакатона (Финал)" data-en="National Hackathon Participant">Участник всероссийского хакатона (Финал)</span>
+                  </div>
+                </div>
+
+                <div class="hack-item">
+                  <div class="hack-badge">2020</div>
+                  <div class="hack-info">
+                    <strong class="hack-name">Phystech.Genesis</strong>
+                    <span class="hack-role" data-ru="Участник хакатона МФТИ" data-en="MIPT Tech Hackathon Participant">Участник хакатона МФТИ</span>
+                  </div>
+                </div>
+
+                <div class="hack-item">
+                  <div class="hack-badge">2019</div>
+                  <div class="hack-info">
+                    <strong class="hack-name">Javathon</strong>
+                    <span class="hack-role" data-ru="Участник хакатона по Java-разработке" data-en="Java Development Hackathon">Участник хакатона по Java-разработке</span>
+                  </div>
+                </div>
+
+                <div class="hack-item">
+                  <div class="hack-badge">2019</div>
+                  <div class="hack-info">
+                    <strong class="hack-name">CraftHack</strong>
+                    <span class="hack-role" data-ru="Участник продуктового хакатона" data-en="Product & Mobile Hackathon">Участник продуктового хакатона</span>
+                  </div>
+                </div>
+
+                <div class="hack-item">
+                  <div class="hack-badge">2018 / 2019</div>
+                  <div class="hack-info">
+                    <strong class="hack-name">Hack&Change</strong>
+                    <span class="hack-role" data-ru="Участник соревнований разработчиков" data-en="Developer Competition Participant">Участник соревнований разработчиков</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact & Feedback Section -->
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag" data-ru="// СВЯЗАТЬСЯ СО МНОЙ" data-en="// GET IN TOUCH">// СВЯЗАТЬСЯ СО МНОЙ</span>
+          <h2 class="section-title" data-ru="Давайте обсудим сотрудничество" data-en="Let's Build Something Great Together">
+            Давайте обсудим сотрудничество
+          </h2>
+          <p class="section-subtitle" data-ru="Всегда рад интересным проектам, предложениям о работе и технологическим вызовам." 
+             data-en="Always open to discussing new opportunities, challenging roles, and engineering collaborations.">
+            Всегда рад интересным проектам, предложениям о работе и технологическим вызовам.
+          </p>
+        </div>
+
+        <div class="contact-grid">
+          <!-- Direct Contact Cards -->
+          <div class="contact-cards-col">
+            <a href="https://t.me/adisalagic" target="_blank" rel="noopener noreferrer" class="contact-card card glow-hover">
+              <div class="contact-icon icon-tg">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.52 2.77-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .37z"/></svg>
+              </div>
+              <div class="contact-card-info">
+                <span class="contact-channel" data-ru="Telegram (Предпочитаемый способ)" data-en="Telegram (Preferred method)">Telegram (Предпочитаемый способ)</span>
+                <span class="contact-val">@adisalagic</span>
+              </div>
+              <span class="contact-arrow">→</span>
+            </a>
+
+            <div class="contact-card card copyable-card" data-copy="igor.plahov.a.a@gmail.com" title="Нажмите, чтобы скопировать email">
+              <div class="contact-icon icon-mail">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </div>
+              <div class="contact-card-info">
+                <span class="contact-channel">Email</span>
+                <span class="contact-val">igor.plahov.a.a@gmail.com</span>
+              </div>
+              <span class="contact-copy-label" data-ru="Копировать" data-en="Copy">Копировать</span>
+            </div>
+
+            <a href="tel:+79260746800" class="contact-card card copyable-card" data-copy="+79260746800" data-type="phone" title="Нажмите, чтобы позвонить или скопировать номер">
+              <div class="contact-icon icon-phone">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              </div>
+              <div class="contact-card-info">
+                <span class="contact-channel" data-ru="Телефон" data-en="Phone">Телефон</span>
+                <span class="contact-val">+7 (926) 074-68-00</span>
+              </div>
+              <span class="contact-copy-label" data-ru="Позвонить / Копировать" data-en="Call / Copy">Позвонить / Копировать</span>
+            </a>
+
+            <a href="https://github.com/AdisAlagic" target="_blank" rel="noopener noreferrer" class="contact-card card glow-hover">
+              <div class="contact-icon icon-gh">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+              </div>
+              <div class="contact-card-info">
+                <span class="contact-channel">GitHub</span>
+                <span class="contact-val">github.com/AdisAlagic</span>
+              </div>
+              <span class="contact-arrow">→</span>
+            </a>
+
+            <a href="https://hh.ru/resume/78f4c138ff07c292d00039ed1f6754546c385a" target="_blank" rel="noopener noreferrer" class="contact-card card glow-hover">
+              <div class="contact-icon icon-hh">
+                <svg viewBox="0 0 24 24" width="28" height="28" class="hh-svg-card-icon" aria-hidden="true">
+                  <circle cx="12" cy="12" r="12" fill="#ea1b24"/>
+                  <path d="M5.3 7h2v4h2V7h2v10h-2v-4h-2v4h-2V7zm7.4 0h2v4h2V7h2v10h-2v-4h-2v4h-2V7z" fill="#ffffff"/>
+                </svg>
+              </div>
+              <div class="contact-card-info">
+                <span class="contact-channel" data-ru="HeadHunter (HH.ru)" data-en="HeadHunter (HH.ru)">HeadHunter (HH.ru)</span>
+                <span class="contact-val">hh.ru/resume/78f4c138...</span>
+              </div>
+              <span class="contact-arrow">→</span>
+            </a>
+          </div>
+
+          <!-- Quick Message Builder Form -->
+          <div class="contact-form-col">
+            <div class="card form-card">
+              <h3 class="card-title" data-ru="Быстрое сообщение в Telegram" data-en="Quick Message to Telegram">
+                Быстрое сообщение в Telegram
+              </h3>
+              <p class="form-hint" data-ru="Напишите ваш вопрос или описание вакансии — кнопка мгновенно сформирует ссылку для диалога в Telegram." 
+                 data-en="Type your message or role details — click below to immediately launch a pre-filled Telegram chat.">
+                Напишите ваш вопрос или описание вакансии — кнопка мгновенно сформирует ссылку для диалога в Telegram.
+              </p>
+
+              <form id="quickContactForm">
+                <div class="form-group">
+                  <label for="senderName" data-ru="Ваше имя или компания" data-en="Your Name or Company">Ваше имя или компания</label>
+                  <input type="text" id="senderName" placeholder="например, Анна (HR TechCorp)" required>
+                </div>
+                <div class="form-group">
+                  <label for="senderMsg" data-ru="Текст сообщения / вакансия" data-en="Message / Job Opportunity">Текст сообщения / вакансия</label>
+                  <textarea id="senderMsg" rows="4" placeholder="Здравствуйте, Игорь! Хотели бы обсудить проект / позицию Kotlin Android разработчика..." required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.52 2.77-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .37z"/></svg>
+                  <span data-ru="Открыть диалог в Telegram" data-en="Open Chat in Telegram">Открыть диалог в Telegram</span>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Project Detail Modal -->
+  <div class="modal-overlay" id="projectModal" aria-hidden="true">
+    <div class="modal-container card" role="dialog" aria-modal="true">
+      <button class="modal-close-btn" id="modalCloseBtn" aria-label="Закрыть модальное окно">&times;</button>
+      <div class="modal-content" id="modalBody">
+        <!-- Dynamically injected via main.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification (Copy success, etc.) -->
+  <div class="toast-notification" id="toastNotification" aria-live="polite">
+    <span class="toast-icon">✓</span>
+    <span class="toast-message" id="toastMessage">Скопировано в буфер обмена!</span>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-container">
+      <div class="footer-left">
+        <span class="footer-name">Плахов Игорь</span>
+        <span class="footer-copy">© 2026. Kotlin Android & Desktop Developer</span>
+      </div>
+      <div class="footer-center">
+        <span class="tech-stack-indicator">Built with Modern HTML5, CSS3 & Clean JavaScript</span>
+      </div>
+      <div class="footer-right">
+        <a href="#hero" class="back-to-top" aria-label="Наверх страницы">
+          <span data-ru="Наверх" data-en="Back to top">Наверх</span>
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 15l-6-6-6 6"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/main.js"></script>
 </body>
 </html>
